@@ -12,9 +12,31 @@ class tablaHash{
 			return clave % size;
 		}
 	public:
-		
+    //Agregamos el metodo de insercion
+        void insertar(int clave){ //Recibimos nuestra clave a insertar
+            int indice = hashModulo(clave); //Calculamos el indice con la funcion hash
+            table[indice].push_back(clave); // Insertar en la lista en el indice calculado
+        }
 
-}
+        void imprimir(){
+            for (int i = 0; i < size; i++)
+            {
+                cout<<i<<": " << endl;
+                for (int num:table[i])
+                {
+                    cout<< num<<"-> ";
+                }
+
+                cout<<"null"<<endl;
+                
+            }
+            
+        }
+
+
+};
+
+
 
 int main(){
     
