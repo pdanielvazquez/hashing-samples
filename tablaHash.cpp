@@ -46,7 +46,7 @@ int main(){
     hash.insertar(15);
     hash.insertar(20);
     hash.insertar(32);
-    hash.insertar(7);
+    hash.insertar(9);
 
     hash.imprimir();
    
