@@ -2,10 +2,9 @@
 #include <list>
 #include <vector>
 
-using namespace std;
-
 int main(){
-    cout << "Hola mundo" << endl; 
+    std::vector<int> u(2);
+    std::cout << u[0] << "  " << u[1] << "  " << false << std::endl;
     return 0;
 }
 
