@@ -11,6 +11,36 @@ class tablaHash{
 		int hashModulo(int clave){
 			return clave % size;
 		}
+        int hashConteo(int clave){
+            return clave / size;
+        }
+        int numElementos(int indice){
+            return table[indice].size();
+        }
+        float umbralCarga(){
+            int totalElementos = 0;
+            for (int i = 0; i < size; i++)
+            {
+                totalElementos += numElementos(i);
+            }
+            return (float)totalElementos / size;
+        }
+        // Definir umbral de carga de 75% para redimensionar la tabla hash
+        void redimensionar(){
+            if (umbralCarga() > 0.75) {
+                int nuevoSize = size * 2;
+                vector<list<int>> nuevaTable(nuevoSize);
+                for (int i = 0; i < size; i++) {
+                    for (int clave : table[i]) {
+                        int nuevoIndice = clave % nuevoSize;
+                        nuevaTable[nuevoIndice].push_back(clave);
+                    }
+                }
+                table = std::move(nuevaTable);
+                size = nuevoSize;
+                cout << "Tabla hash redimensionada a tamaño: " << size << endl;
+            }
+        }
 	public:
         tablaHash(int s): size(s), table(s){} //Constructor para inicializar el tamaño y la tabla hash
     //Agregamos el metodo de insercion
@@ -19,6 +49,7 @@ class tablaHash{
             table[indice].push_back(clave);
             //imprimir el indice calculado y la clave insertada
             cout<<"Clave "<<clave<<" insertada en el indice "<<indice<<endl;
+            redimensionar(); // Verificar si es necesario redimensionar la tabla hash
 
         }
         //metodo imprimir
