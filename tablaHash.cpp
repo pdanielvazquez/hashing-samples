@@ -70,8 +70,6 @@ class tablaHash{
 
 };
 
-
-
 int main(){
  //crear tabla hash
    tablaHash hash(5) ;
@@ -83,6 +81,4 @@ int main(){
     hash.insertar(7);
 
     hash.imprimir();
-   
-
 }

@@ -72,6 +72,4 @@ int main(){
 	hash.insertar(7);
 
 	hash.imprimir();
-
-
 }
