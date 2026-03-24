@@ -5,6 +5,8 @@ class tablaHash {
 	int size, inserts;
 	float umbral;
 
+		const int ELIMINADO = -1;
+
 	std::vector <int> table;
 	int hashModulo(const int clave) const {
 		return clave % size;
@@ -13,7 +15,7 @@ class tablaHash {
 	void linear_probe(int indice, int clave) {
 		int check = indice;
 		bool flag = false;
-		while (table[indice] != false) {
+		while (table[indice] != 0 && table[indice] != ELIMINADO) {			
 			if (flag && indice == check) return;
 			flag = true;
 			indice++;
@@ -51,6 +53,48 @@ public:
 			redimensionar(clave);
 		}
 	}
+	bool buscar(const int clave) const {
+	int indice = hashModulo(clave);
+	int inicio = indice;
+	bool flag = false;
+
+	while (table[indice] != 0) {
+		if (table[indice] == clave) {
+			return true;
+		}
+
+		indice++;
+		if (indice >= size) indice = 0;
+
+		if (flag && indice == inicio) break;
+		flag = true;
+	}
+
+	return false;
+}
+
+bool borrar(const int clave) {
+	int indice = hashModulo(clave);
+	int inicio = indice;
+	bool flag = false;
+
+	while (table[indice] != 0) {
+		if (table[indice] == clave) {
+			table[indice] = ELIMINADO;
+			std::cout << "Clave " << clave << " eliminada\n";
+			return true;
+		}
+
+		indice++;
+		if (indice >= size) indice = 0;
+
+		if (flag && indice == inicio) break;
+		flag = true;
+	}
+
+	std::cout << "Clave " << clave << " no encontrada\n";
+	return false;
+}
 	//metodo imprimir
 	void imprimir(){
 		for (int i = 0; i < size; i++) {
