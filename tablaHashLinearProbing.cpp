@@ -5,6 +5,8 @@ class tablaHash {
 	int size, inserts;
 	float umbral;
 
+	const int VACIO = -1;
+
 	std::vector <int> table;
 	int hashModulo(const int clave) const {
 		return clave % size;
@@ -25,12 +27,21 @@ class tablaHash {
 	}
 
 	void redimensionar(const int clave) {
+		int oldSize = size;
 		int new_size = size * 2;
 		std::vector <int> new_table(new_size);
-		for (int nc : table) {
-			int indice = hashModulo(nc);
-			new_table[indice] = nc;
+
+		std::vector<int> oldTable = table;
+		table = std::vector<int>(size, VACIO);
+
+		inserts = 0;
+
+		for (int val : oldTable) {
+			if (val != VACIO){
+				insertar(val);
+			}
 		}
+		std::cout << "Rehashing realizado. Nuevo tamano: " << size << std::endl;
 		size = new_size;
 	}
 public:
@@ -70,6 +81,9 @@ int main(){
 	hash.insertar(20);
 	hash.insertar(32);
 	hash.insertar(7);
+	hash.insertar(20);
+	hash.insertar(25);
+	hash.insertar(30);
 
 	hash.imprimir();
 
